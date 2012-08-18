@@ -56,10 +56,14 @@ tests = {
     fs.rmdirSync('foo');
   }
 
-// TODO: Need Windows test with c:\\
 , 'test basedir with Unix absolute path': function () {
     var p = '/foo/bar/baz';
-    assert.equal('/', file.basedir(p));
+    assert.equal('/foo/bar/', file.basedir(p));
+  }
+
+, 'test basedir with Windows absolute path': function () {
+    var p = 'C:\\foo\\bar\\baz';
+    assert.equal('C:\\foo\\bar\\', file.basedir(p));
   }
 
 , 'test basedir with Unix absolute path and double-asterisk': function () {
@@ -69,27 +73,27 @@ tests = {
 
 , 'test basedir with leading double-asterisk': function () {
     var p = '**/foo';
-    assert.equal('.', file.basedir(p));
+    assert.equal('./', file.basedir(p));
   }
 
 , 'test basedir with leading asterisk': function () {
     var p = '*.js';
-    assert.equal('.', file.basedir(p));
+    assert.equal('./', file.basedir(p));
   }
 
 , 'test basedir with leading dot-slash and double-asterisk': function () {
     var p = './**/foo';
-    assert.equal('.', file.basedir(p));
+    assert.equal('./', file.basedir(p));
   }
 
 , 'test basedir with leading dirname and double-asterisk': function () {
     var p = 'a/**/*.js';
-    assert.equal('a', file.basedir(p));
+    assert.equal('a/', file.basedir(p));
   }
 
 , 'test basedir with leading dot-dot-slash and double-asterisk': function () {
     var p = '../test/**/*.js';
-    assert.equal('..', file.basedir(p));
+    assert.equal('../test/', file.basedir(p));
   }
 
 };
