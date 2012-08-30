@@ -117,6 +117,11 @@ tests = {
     assert.equal('./', file.basedir());
   }
 
+, 'test basedir with dot-dot path': function () {
+    var p = '..';
+    assert.equal('../', file.basedir(p));
+  }
+
 };
 
 module.exports = tests;
